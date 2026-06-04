@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Padaria - Cadastro de Produto</title>
+    <link rel="stylesheet" th:href="@{/estilo.css}">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Cadastrar Produto</h2>
+        
+        <!-- th:action envia para o /produtos/salvar e th:object vincula com a classe Produto -->
+        <form th:action="@{/produtos/salvar}" th:object="${produto}" method="POST">
+            
+            <!-- Campo oculto para guardar o ID em caso de edição futura -->
+            <input type="hidden" th:field="*{id}">
+
+            <div class="campo">
+                <label for="nome">Nome do Produto:</label>
+                <!-- th:field="*{nome}" joga o valor direto no private String nome da classe -->
+                <input type="text" id="nome" th:field="*{nome}" placeholder="Ex: Pão Francês" required>
+            </div>
+            
+            <div class="campo">
+                <label for="preco">Preço (R$):</label>
+                <!-- th:field="*{preco}" liga com o private double preco -->
+                <input type="number" id="preco" th:field="*{preco}" step="0.01" placeholder="Ex: 0.50" required>
+            </div>
+            
+            <div class="campo">
+                <label for="quantidade">Quantidade:</label>
+                <!-- th:field="*{quantidadeEstoque}" liga com a variável mapeada no seu Model -->
+                <input type="number" id="quantidade" th:field="*{quantidadeEstoque}" placeholder="Ex: 100" required>
+            </div>
+            
+            <button type="submit">Salvar Produto</button>
+        </form>
+    </div>
+
+</body>
+</html>

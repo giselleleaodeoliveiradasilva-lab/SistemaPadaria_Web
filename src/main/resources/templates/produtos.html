@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Padaria - Estoque de Produtos</title>
+    <link rel="stylesheet" th:href="@{/estilo.css}">
+    <style>
+        /* Estilos rápidos extras para a tabela ficar alinhada com seu design */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
+        th, td { padding: 12px; border: 1px solid #ccc; text-align: left; }
+        th { background-color: #28a745; color: white; }
+        .btn-novo { display: inline-block; background-color: #28a745; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; margin-bottom: 15px; }
+        .btn-excluir { color: #dc3545; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div style="max-width: 800px; margin: 50px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        <h2>Estoque da Padaria</h2>
+        
+        <a th:href="@{/produtos/novo}" class="btn-novo">+ Cadastrar Novo Produto</a>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                    <th>Quantidade</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="prod : ${produtos}">
+                    <td th:text="${prod.id}"></td>
+                    <td th:text="${prod.nome}"></td>
+                    <td th:text="'R$ ' + ${prod.preco}"></td>
+                    <td th:text="${prod.quantidadeEstoque}"></td>
+                    <td>
+                        <a th:href="@{/produtos/excluir/{id}(id=${prod.id})}" class="btn-excluir" onclick="return confirm('Tem certeza que deseja excluir este produto?')">Excluir</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

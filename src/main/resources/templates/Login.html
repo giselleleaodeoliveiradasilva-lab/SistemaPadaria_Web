@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Padaria - Login</title>
+    <!-- O Thymeleaf ajusta o caminho do CSS automaticamente usando th:href -->
+    <link rel="stylesheet" th:href="@{/estilo.css}">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Acesso ao Sistema</h2>
+        
+        <!-- th:action aponta para a rota @PostMapping("/autenticar") do seu LoginController -->
+        <form th:action="@{/autenticar}" method="POST">
+            
+            <!-- Bloco para exibir mensagem de erro caso o login falhe -->
+            <div th:if="${erro}" style="color: red; text-align: center; margin-bottom: 15px;">
+                <p th:text="${erro}"></p>
+            </div>
+
+            <div class="campo">
+                <label for="usuario">Usuário:</label>
+                <!-- O atributo name="login" deve bater com o @RequestParam do Controller -->
+                <input type="text" id="usuario" name="login" placeholder="Digite seu usuário" required>
+            </div>
+            <div class="campo">
+                <label for="senha">Senha:</label>
+                <!-- O atributo name="senha" deve bater com o @RequestParam do Controller -->
+                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+            </div>
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
+
+</body>
+</html>
